@@ -5,7 +5,8 @@ const generateSlots = async (req, res) => {
     const { doctor_uuid, start_date, end_date } = req.body;
 
     const availability = await supabase
-        .from('medscheduler.availabilities')
+        .schema('medscheduler')
+        .from('availabilities')
         .select('*')
         .eq('doctor_id', doctor_uuid);
 
@@ -14,7 +15,8 @@ const generateSlots = async (req, res) => {
     }
 
     const holidays = await supabase
-        .from('medscheduler.holidays')
+        .schema('medscheduler')
+        .from('holidays')
         .select('date')
         .gte('date', start_date)
         .lte('date', end_date);
@@ -47,6 +49,7 @@ const generateSlots = async (req, res) => {
     }
 
     const { error } = await supabase
+        .schema('medscheduler')
         .from('medscheduler.available_slots')
         .insert(slots);
 

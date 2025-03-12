@@ -48,6 +48,28 @@
                 }
             },
             "response": []
+        },
+        {
+            "name": "Create Availability",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"action\": \"create_availability\",\n    \"doctor_uuid\": \"doctor-uuid-here\",\n    \"weekday\": 1,\n    \"start_time\": \"09:00\",\n    \"end_time\": \"17:00\",\n    \"consultation_duration\": \"30 minutes\"\n}"
+                },
+                "url": {
+                    "raw": "{{base_url}}/medscheduler",
+                    "host": ["{{base_url}}"],
+                    "path": ["medscheduler"]
+                }
+            },
+            "response": []
         }
     ],
     "variable": [

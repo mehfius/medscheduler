@@ -1,2 +1,2 @@
 const { createClient } = require('@supabase/supabase-js');
-module.exports = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY); 
+module.exports = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SECRET_ROLE); 

@@ -9,7 +9,6 @@
     },
     "dependencies": {
         "@google-cloud/functions-framework": "^3.4.6",
-        "@supabase/supabase-js": "^2.49.1",
-        "supabase": "^2.19.5"
+        "@supabase/supabase-js": "^2.49.1"
     }
 }

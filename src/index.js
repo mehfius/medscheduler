@@ -2,6 +2,7 @@ const functions = require('@google-cloud/functions-framework');
 const { generateSlots } = require('./controllers/generateSlots');
 const { scheduleAppointment } = require('./controllers/scheduleAppointment');
 const { sendResponse } = require('./utils/responseHandler');
+const { create_availability } = require('./controllers/createAvailability');
 
 functions.http('medscheduler', async (req, res) => {
     try {
@@ -16,6 +17,8 @@ functions.http('medscheduler', async (req, res) => {
                 return await generateSlots(req, res);
             case 'schedule_appointment':
                 return await scheduleAppointment(req, res);
+            case 'create_availability':
+                return await create_availability(req, res);
             default:
                 return sendResponse(res, 400, 'INVALID_ACTION', 'Invalid action specified');
         }

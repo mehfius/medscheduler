@@ -81,6 +81,39 @@ All requests should be `POST` requests with a JSON body.
    }
    ```
 
+3. **Create Availability**
+   - Action: `create_availability`
+   - Required Parameters:
+     - `doctor_uuid`: UUID of the doctor
+     - `weekday`: Day of the week (0 = Sunday, 6 = Saturday)
+     - `start_time`: Start time of availability (HH:MM)
+     - `end_time`: End time of availability (HH:MM)
+   - Optional Parameters:
+     - `consultation_duration`: Duration of each consultation (default: 30 minutes)
+
+   Example Request:
+   ```json
+   {
+       "action": "create_availability",
+       "doctor_uuid": "doctor-uuid-here",
+       "weekday": 1,
+       "start_time": "09:00",
+       "end_time": "17:00",
+       "consultation_duration": "30 minutes"
+   }
+   ```
+
+   Example Response:
+   ```json
+   {
+       "code": "AVAILABILITY_CREATED",
+       "message": "Availability created successfully",
+       "data": {
+           "availability_id": 123
+       }
+   }
+   ```
+
 ## Error Responses
 
 All error responses follow the same format:

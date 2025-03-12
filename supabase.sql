@@ -39,4 +39,11 @@ CREATE TABLE medscheduler.holidays (
     description VARCHAR(255) NOT NULL
 );
 
+ALTER TABLE medscheduler.availabilities 
+ADD CONSTRAINT no_overlapping_availabilities 
+EXCLUDE USING gist (
+    doctor_id WITH =, 
+    weekday WITH =, 
+    numrange(EXTRACT(EPOCH FROM start_time), EXTRACT(EPOCH FROM end_time), '[)') WITH &&
+);
 

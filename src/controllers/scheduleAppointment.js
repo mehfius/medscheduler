@@ -8,7 +8,8 @@ const scheduleAppointment = async (req, res) => {
     const weekday = appointment_datetime.getDay();
 
     const availability = await supabase
-        .from('medscheduler.availabilities')
+        .schema('medscheduler')
+        .from('availabilities')
         .select('*')
         .eq('doctor_id', doctor_uuid)
         .eq('weekday', weekday)
@@ -19,7 +20,8 @@ const scheduleAppointment = async (req, res) => {
     }
 
     const slot_available = await supabase
-        .from('medscheduler.available_slots')
+        .schema('medscheduler')
+        .from('available_slots')
         .select('*')
         .eq('doctor_id', doctor_uuid)
         .eq('date', date)
@@ -32,7 +34,8 @@ const scheduleAppointment = async (req, res) => {
     }
 
     const { data, error } = await supabase
-        .from('medscheduler.appointments')
+        .schema('medscheduler')
+        .from('appointments')
         .insert([
             {
                 doctor_id: doctor_uuid,
@@ -45,7 +48,8 @@ const scheduleAppointment = async (req, res) => {
     if (error) throw error;
 
     await supabase
-        .from('medscheduler.available_slots')
+        .schema('medscheduler')
+        .from('available_slots')
         .update({ reserved: true })
         .eq('id', slot_available.data.id);
 
